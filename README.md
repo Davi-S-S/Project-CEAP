@@ -27,4 +27,5 @@ Esse projeto visa facilitar o indivíduo que tem de fazer várias (ou até pouca
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/Davi-S-S/Project-CEAP
+   git clone https://github.com/Davi-S-S/Project-CEAP.git
+   
