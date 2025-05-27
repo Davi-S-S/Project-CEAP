@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RouteMaster - Planejador de Rotas com Mapa</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>RouteMaster</h1>
+        <p class="subtitle">Otimizador de rotas para carretos com mapa integrado</p>
+
+        <div class="input-group">
+            <label for="orderCount">Quantidade de encomendas hoje:</label>
+            <input type="number" id="orderCount" min="0" placeholder="Digite o número de encomendas">
+        </div>
+
+        <div id="addressInputContainer" style="display: none;">
+            <div class="input-group">
+                <label for="cepInput">CEP (formato: 12345-678):</label>
+                <input type="text" id="cepInput" placeholder="Digite o CEP">
+            </div>
+            <div class="input-group">
+                <label for="streetNumber">Número:</label>
+                <input type="text" id="streetNumber" placeholder="Número do endereço">
+            </div>
+            <button id="addAddress">Adicionar Endereço</button>
+            <div id="addressList" class="address-list"></div>
+            <button id="calculateRoute">Calcular Melhor Rota</button>
+        </div>
+
+        <div id="noOrdersMessage" class="no-orders" style="display: none;">
+            Você não tem encomendas hoje!
+        </div>
+
+        <div class="loading" id="loadingIndicator">
+            <div class="loading-spinner"></div>
+            <p>Calculando a melhor rota...</p>
+        </div>
+
+        <div id="resultContainer" class="result-container">
+            <h3 class="result-title">Melhor Rota Otimizada</h3>
+            <ol class="route-list" id="routeList"></ol>
+            
+            <div id="distanceInfo" class="distance-info" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                <span id="distanceText">Distância total: </span>
+            </div>
+            
+            <div id="timeInfo" class="time-info" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24">
+                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                    <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                </svg>
+                <span id="timeText">Tempo estimado: </span>
+            </div>
+
+            <!-- Container do Mapa -->
+            <div id="routeMap" style="height: 400px; width: 100%; margin-top: 20px; display: none;"></div>
+            
+            <button id="openMaps" class="map-button" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                Abrir no Google Maps
+            </button>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <p id="notificationMessage"></p>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
